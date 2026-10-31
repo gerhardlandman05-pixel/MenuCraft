@@ -1,36 +1,25 @@
-# CV Studio — CV builder
+# MenuCraft — Digital Menu Creator
 
-A responsive, browser-based CV builder built with plain HTML, CSS and JavaScript.
+A responsive, single-page digital menu builder starter project.
 
-## Run locally
+## Run it
 1. Extract the ZIP.
-2. Open `index.html` in Chrome, Edge or Firefox.
-3. Add CV details, choose a design, then select **Download PDF**.
-4. In the print dialog, choose **Save as PDF** and A4 paper.
+2. Open `index.html` in a modern browser.
+3. Edit restaurant details, categories, items, prices and theme.
+4. Use **Save draft** to save to that browser, **Export data** to download a JSON backup, or **Print / Save PDF** to export the menu.
 
 ## Included
-- Live CV preview
-- Personal details, profile, experience, education, skills and additional information
-- Add/remove multiple experience and education entries
-- Eight CV templates: Classic, Minimal, Modern, Clean, Executive, Sidebar, Compact and Elegant
-- Accent colour selection
-- Light and dark editor themes (your preference is saved in this browser)
-- Cover letter builder with printable preview
-- Save draft in the current browser using localStorage
-- Responsive layout for desktop and mobile
-- Print-friendly A4 PDF output
+- Live customer-facing menu preview
+- Add/remove menu categories and menu items
+- South African Rand pricing
+- Five menu styles: Classic, Dark, Terracotta, Midnight and Luxe
+- Browser-local draft saving
+- JSON data export
+- Print-friendly PDF export through the browser
+- QR code generation for a supplied public menu URL (requires internet access)
 
-## Important limitations before commercial sale
-This is a front-end starter product, not a complete hosted SaaS business:
-- Drafts are stored only in the visitor's browser. There is no account system or cloud sync.
-- PDF export relies on the browser print dialog.
-- No payments, subscriptions, analytics, admin dashboard or backend are included.
-- Test thoroughly in current Chrome, Edge, Firefox and mobile browsers.
-- Add a privacy policy and terms before collecting or processing personal information.
-- Do not claim that a CV is guaranteed to pass applicant-tracking systems (ATS).
+## Important limitations before selling
+This is a front-end prototype, not a hosted SaaS product. It does not create public restaurant URLs, user accounts, cloud storage, payments, custom domains, or a restaurant admin backend. Drafts are stored only in the browser where they were created. QR code generation uses an external QR service and requires internet access. Do not enter private customer data.
 
-## Publishing
-You can publish this static site using GitHub Pages: create a repository, upload `index.html`, then enable Pages in repository Settings.
+For a commercial multi-restaurant product, add a secure backend, authentication, database, tenant separation, hosted public menu pages, backups, privacy policy, terms, and a payment provider. Keep any API keys on the server, not in browser JavaScript.
 
-## Commercial readiness
-You may adapt this starter for your own project, but test it thoroughly, document what is included, and verify the marketplace's current listing and seller rules before offering it for sale.
