@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>MenuCraft — Digital Menu Creator</title>
+<style>
+:root{--bg:#f3f5f8;--panel:#fff;--ink:#182230;--muted:#697586;--line:#e4e8ef;--accent:#16856b;--soft:#e9f5f1;--shadow:0 12px 35px #1720330d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.topbar{height:68px;background:#101827;color:white;display:flex;align-items:center;justify-content:space-between;padding:0 max(22px,calc((100vw - 1380px)/2));position:sticky;top:0;z-index:5}
+.brand{font-weight:800;font-size:20px;letter-spacing:-.5px}.brand span{color:#63d4b1}.top-actions{display:flex;gap:10px;align-items:center}.topbar small{color:#aab5c5}
+.btn{border:0;border-radius:10px;padding:10px 15px;font-weight:700;background:var(--accent);color:white}.btn.secondary{background:#edf1f5;color:#263445}.btn.dark{background:#243348;color:white}.btn.danger{background:#fff0ef;color:#b23a32}.btn.small{padding:7px 10px;font-size:13px}
+.layout{max-width:1380px;margin:26px auto;padding:0 22px;display:grid;grid-template-columns:minmax(340px,520px) minmax(360px,1fr);gap:22px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.panel-head h2{font-size:17px;margin:0}.panel-body{padding:20px}.section{padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}.section:last-child{border:0;padding:0;margin:0}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.section-title h3{margin:0;font-size:14px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field:last-child{margin-bottom:0}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink);outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #16856b1a}.field textarea{min-height:75px;resize:vertical}.hint{font-size:12px;color:var(--muted);margin:5px 0 0}.item-card{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:#fbfcfd}.item-card-top{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}.item-card-top strong{font-size:13px}.item-card .field{margin-bottom:8px}.item-card .field-grid{gap:8px}.category-row{display:flex;gap:8px;align-items:center}.category-row input{flex:1}
+.preview-wrap{position:sticky;top:90px}.preview-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.preview{padding:26px;background:#f1eee8;min-height:700px}.menu-paper{max-width:620px;margin:0 auto;background:#fff;min-height:650px;box-shadow:0 12px 40px #1d26351a;overflow:hidden;color:#262b2a}.menu-cover{text-align:center;padding:38px 32px 26px;background:#fff}.menu-logo{width:62px;height:62px;border-radius:50%;border:1px solid #d9e4df;display:grid;place-items:center;margin:0 auto 14px;color:var(--accent);font-size:25px;font-weight:800}.menu-cover h1{font-family:Georgia,serif;font-size:35px;line-height:1.1;margin:0 0 8px;letter-spacing:-1px}.menu-cover p{color:#747d78;margin:0;font-size:13px}.menu-content{padding:8px 38px 36px}.menu-category{margin:22px 0 8px;font-family:Georgia,serif;font-size:21px;color:var(--accent);border-bottom:1px solid #e6e9e6;padding-bottom:7px}.menu-item{display:flex;justify-content:space-between;gap:15px;padding:12px 0;border-bottom:1px dotted #e2e4e0}.menu-item:last-child{border:0}.menu-item h4{margin:0 0 3px;font-size:14px}.menu-item p{margin:0;color:#7c827e;font-size:12px;max-width:390px}.menu-price{font-weight:800;white-space:nowrap;font-size:14px}.menu-footer{text-align:center;padding:18px 20px 28px;color:#8b928d;font-size:11px}.menu-contact{margin-top:8px}.theme-pills{display:flex;gap:8px;flex-wrap:wrap}.theme-choice{border:1px solid var(--line);background:white;color:var(--ink);border-radius:9px;padding:8px 11px;font-size:12px}.theme-choice.active{border-color:var(--accent);background:var(--soft);color:var(--accent);font-weight:800}
+.menu-paper.theme-dark{background:#18221f;color:#f4f2e9}.theme-dark .menu-cover{background:#18221f}.theme-dark .menu-cover p,.theme-dark .menu-item p,.theme-dark .menu-footer{color:#aebbb4}.theme-dark .menu-category{border-color:#35443d}.theme-dark .menu-item{border-color:#35443d}.menu-paper.theme-terracotta{--accent:#b65b3e}.menu-paper.theme-midnight{--accent:#637fbd}.menu-paper.theme-luxe{--accent:#a8874d}
+.qr-area{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.qr-box{width:130px;height:130px;border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;background:white;overflow:hidden}.qr-box img{width:120px;height:120px}.qr-box span{font-size:11px;color:var(--muted);text-align:center;padding:8px}
+.notice{padding:12px;border-radius:10px;background:#fff8e8;color:#76551b;font-size:12px;margin-top:12px}.empty{color:var(--muted);font-size:13px;padding:12px;text-align:center}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.preview-wrap{position:static}.preview{padding:14px}.topbar{padding:0 16px}.topbar small{display:none}}
+@media(max-width:520px){.field-grid{grid-template-columns:1fr}.panel-body{padding:15px}.menu-content{padding:8px 22px 28px}.menu-cover{padding:30px 20px 20px}.menu-cover h1{font-size:29px}.top-actions .btn{padding:8px 10px;font-size:12px}}
+@media print{body{background:white}.topbar,.editor-panel,.panel-head,.preview-toolbar,.no-print{display:none!important}.layout{display:block;margin:0;padding:0}.preview-wrap,.panel{position:static;border:0;box-shadow:none}.preview{padding:0;background:white}.menu-paper{max-width:none;min-height:0;box-shadow:none}.menu-cover,.menu-content,.menu-footer{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Menu<span>Craft</span></div>
+  <div class="top-actions"><small>Digital menu builder</small><button class="btn secondary" id="resetBtn">Start over</button><button class="btn" id="printBtn">Print / Save PDF</button></div>
+</header>
+<main class="layout">
+<section class="panel editor-panel">
+ <div class="panel-head"><h2>Build your restaurant menu</h2><span style="font-size:12px;color:var(--muted)">Live editor</span></div>
+ <div class="panel-body">
+  <div class="section">
+   <div class="section-title"><h3>Restaurant details</h3></div>
+   <div class="field"><label>RESTAURANT NAME</label><input id="restaurantName" value="The Garden Table" maxlength="50"></div>
+   <div class="field"><label>SHORT DESCRIPTION</label><input id="tagline" value="Fresh food, made with care" maxlength="90"></div>
+   <div class="field-grid">
+    <div class="field"><label>PHONE / WHATSAPP</label><input id="phone" placeholder="+27 00 000 0000"></div>
+    <div class="field"><label>LOCATION</label><input id="location" placeholder="Town or suburb"></div>
+   </div>
+   <div class="field"><label>FOOTER MESSAGE</label><input id="footer" value="Thank you for visiting us!" maxlength="100"></div>
+  </div>
+  <div class="section">
+   <div class="section-title"><h3>Menu appearance</h3></div>
+   <div class="theme-pills">
+    <button class="theme-choice active" data-theme="classic">Classic</button><button class="theme-choice" data-theme="dark">Dark</button><button class="theme-choice" data-theme="terracotta">Terracotta</button><button class="theme-choice" data-theme="midnight">Midnight</button><button class="theme-choice" data-theme="luxe">Luxe</button>
+   </div>
+   <p class="hint">Choose a style for your customer-facing menu.</p>
+  </div>
+  <div class="section">
+   <div class="section-title"><h3>Menu categories</h3><button class="btn small" id="addCategory">+ Add category</button></div>
+   <div id="categories"></div>
+   <p class="hint">Add sections such as Breakfast, Main Meals, Drinks or Desserts. Add menu items inside each section.</p>
+  </div>
+  <div class="section">
+   <div class="section-title"><h3>Share your menu</h3></div>
+   <div class="field"><label>PUBLIC MENU LINK</label><input id="menuUrl" placeholder="https://yourrestaurant.com/menu" type="url"></div>
+   <div class="qr-area"><div class="qr-box" id="qrBox"><span>Enter a public menu link to create a QR code.</span></div><div style="flex:1;min-width:160px"><button class="btn small" id="makeQr">Create QR code</button><p class="hint">Publish your menu online first, then paste its public URL here. The QR code will open that link.</p></div></div>
+   <div class="notice">This starter version previews and prints your menu in the browser. It does not host a public menu link or store restaurant data online yet.</div>
+  </div>
+ </div>
+</section>
+<section class="preview-wrap">
+ <div class="panel">
+  <div class="panel-head"><h2>Customer preview</h2><div class="preview-toolbar"><button class="btn secondary small" id="downloadData">Export data</button><button class="btn small" id="saveBtn">Save draft</button></div></div>
+  <div class="preview"><article class="menu-paper" id="menuPaper">
+   <div class="menu-cover"><div class="menu-logo">✦</div><h1 id="previewName">The Garden Table</h1><p id="previewTagline">Fresh food, made with care</p></div>
+   <div class="menu-content" id="previewContent"></div>
+   <div class="menu-footer"><div id="previewFooter">Thank you for visiting us!</div><div class="menu-contact" id="previewContact"></div></div>
+  </article></div>
+ </div>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let theme='classic';
+let categories=[
+ {name:'Breakfast',items:[{name:'Farmhouse Breakfast',desc:'Two eggs, toasted sourdough, grilled tomato and mushrooms.',price:'89.00'},{name:'Buttermilk Pancakes',desc:'Fluffy pancakes with seasonal fruit and maple syrup.',price:'72.00'}]},
+ {name:'Main Meals',items:[{name:'Grilled Chicken Bowl',desc:'Herb chicken, roasted vegetables and lemon dressing.',price:'125.00'},{name:'Garden Burger',desc:'House-made patty, cheddar, lettuce and tomato.',price:'115.00'}]},
+ {name:'Drinks',items:[{name:'Fresh Lemonade',desc:'Freshly squeezed lemon with a hint of mint.',price:'35.00'}]}
+];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function renderEditor(){
+ $('categories').innerHTML=categories.map((cat,ci)=>`<div class="item-card"><div class="item-card-top"><strong>Category ${ci+1}</strong><button class="btn danger small" data-remove-cat="${ci}">Remove</button></div><div class="field"><label>CATEGORY NAME</label><input data-cat-name="${ci}" value="${esc(cat.name)}" placeholder="Category name"></div>${cat.items.map((it,ii)=>`<div class="item-card"><div class="item-card-top"><strong>Menu item ${ii+1}</strong><button class="btn danger small" data-remove-item="${ci},${ii}">Remove</button></div><div class="field-grid"><div class="field"><label>ITEM NAME</label><input data-item="${ci},${ii},name" value="${esc(it.name)}" placeholder="Dish name"></div><div class="field"><label>PRICE (R)</label><input data-item="${ci},${ii},price" type="number" min="0" step="0.01" value="${esc(it.price)}" placeholder="0.00"></div></div><div class="field"><label>DESCRIPTION</label><textarea data-item="${ci},${ii},desc" placeholder="Describe the dish">${esc(it.desc)}</textarea></div></div>`).join('')}<button class="btn secondary small" data-add-item="${ci}">+ Add menu item</button></div>`).join('');
+}
+function money(v){let n=Number(v);return Number.isFinite(n)?'R '+n.toFixed(2):'Price on request'}
+function renderPreview(){
+ $('previewName').textContent=$('restaurantName').value||'Your Restaurant';$('previewTagline').textContent=$('tagline').value;
+ $('previewFooter').textContent=$('footer').value;
+ const contact=[$('phone').value,$('location').value].filter(Boolean);$('previewContact').textContent=contact.join(' · ');
+ $('previewContent').innerHTML=categories.map(cat=>`<section><h2 class="menu-category">${esc(cat.name||'Menu')}</h2>${cat.items.length?cat.items.map(it=>`<div class="menu-item"><div><h4>${esc(it.name||'Untitled item')}</h4><p>${esc(it.desc)}</p></div><div class="menu-price">${money(it.price)}</div></div>`).join(''):'<div class="empty">No items in this category yet.</div>'}</section>`).join('');
+ $('menuPaper').className='menu-paper'+(theme==='dark'?' theme-dark':theme==='terracotta'?' theme-terracotta':theme==='midnight'?' theme-midnight':theme==='luxe'?' theme-luxe':'');
+ document.querySelectorAll('.theme-choice').forEach(b=>b.classList.toggle('active',b.dataset.theme===theme));
+}
+function update(){renderPreview()}
+$('categories').addEventListener('input',e=>{
+ const t=e.target;if(t.dataset.catName!==undefined){categories[+t.dataset.catName].name=t.value}
+ if(t.dataset.item){const [ci,ii,key]=t.dataset.item.split(',');categories[+ci].items[+ii][key]=t.value}
+ renderPreview();
+});
+$('categories').addEventListener('click',e=>{
+ const t=e.target;
+ if(t.dataset.removeCat!==undefined){categories.splice(+t.dataset.removeCat,1);renderEditor();renderPreview()}
+ if(t.dataset.removeItem){const [ci,ii]=t.dataset.removeItem.split(',');categories[+ci].items.splice(+ii,1);renderEditor();renderPreview()}
+ if(t.dataset.addItem!==undefined){categories[+t.dataset.addItem].items.push({name:'New item',desc:'',price:'0.00'});renderEditor();renderPreview()}
+});
+['restaurantName','tagline','phone','location','footer'].forEach(id=>$(id).addEventListener('input',update));
+$('addCategory').onclick=()=>{categories.push({name:'New category',items:[]});renderEditor();renderPreview()};
+document.querySelectorAll('.theme-choice').forEach(b=>b.onclick=()=>{theme=b.dataset.theme;renderPreview()});
+$('printBtn').onclick=()=>window.print();
+function snapshot(){return {restaurantName:$('restaurantName').value,tagline:$('tagline').value,phone:$('phone').value,location:$('location').value,footer:$('footer').value,theme,categories}}
+$('saveBtn').onclick=()=>{try{localStorage.setItem('menucraft-draft',JSON.stringify(snapshot()));alert('Draft saved in this browser.')}catch(e){alert('Could not save draft in this browser.')}};
+$('resetBtn').onclick=()=>{if(!confirm('Start over and replace the current menu?'))return;localStorage.removeItem('menucraft-draft');location.reload()};
+$('downloadData').onclick=()=>{const blob=new Blob([JSON.stringify(snapshot(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='restaurant-menu-data.json';a.click();URL.revokeObjectURL(a.href)};
+$('makeQr').onclick=()=>{const url=$('menuUrl').value.trim();if(!/^https?:\/\//i.test(url)){alert('Enter a complete public URL beginning with https://');return}const img=document.createElement('img');img.alt='QR code for restaurant menu';img.src='https://api.qrserver.com/v1/create-qr-code/?size=240x240&data='+encodeURIComponent(url);img.onerror=()=>{$('qrBox').innerHTML='<span>QR service unavailable. Check your internet connection.</span>'};$('qrBox').replaceChildren(img)};
+try{const saved=JSON.parse(localStorage.getItem('menucraft-draft'));if(saved){['restaurantName','tagline','phone','location','footer'].forEach(id=>{if(saved[id]!==undefined)$(id).value=saved[id]});if(Array.isArray(saved.categories))categories=saved.categories;if(saved.theme)theme=saved.theme}}catch(e){}
+renderEditor();renderPreview();
+</script>
+</body>
+</html>
